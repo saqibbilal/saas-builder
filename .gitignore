@@ -1,0 +1,80 @@
+# Logs
+*.log
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Environment Files
+.env
+.env.*
+!.env.example
+.env.backup
+.env.production
+
+# Authentication / Secrets
+auth.json
+
+# PHP
+.phpactor.json
+.phpunit.result.cache
+.phpunit.cache
+_ide_helper.php
+
+# Composer / Node
+/vendor
+/node_modules
+
+# Build Artifacts
+/public/build
+/public/hot
+/public/fonts-manifest.dev.json
+/build
+/dist
+
+# Storage
+/public/storage
+/storage/*.key
+/storage/pail
+
+/storage/logs/*
+!/storage/logs/.gitignore
+
+/storage/framework/cache/*
+!/storage/framework/cache/.gitignore
+
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitignore
+
+/storage/framework/testing/*
+!/storage/framework/testing/.gitignore
+
+/storage/framework/views/*
+!/storage/framework/views/.gitignore
+
+# Coverage
+/coverage
+
+# IDEs / Editors
+/.idea
+/.vscode
+/.zed
+
+# AI Tooling
+/.codex
+/.cursor
+/.claude
+/.windsurf
+
+# Laravel / Local Tools
+/.nova
+/public/horizon
+/public/telescope
+
+# Local Environments
+Homestead.json
+Homestead.yaml
+
+# Temporary Files
+*.swp
+*.swo
