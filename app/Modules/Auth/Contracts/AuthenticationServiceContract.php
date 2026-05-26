@@ -3,7 +3,6 @@
 namespace App\Modules\Auth\Contracts;
 
 use App\Modules\Auth\Data\LoginData;
-use App\Models\User;
 
 interface AuthenticationServiceContract
 {

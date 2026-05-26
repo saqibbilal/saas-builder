@@ -2,8 +2,8 @@
 
 namespace App\Modules\Auth\Actions;
 
-use App\Modules\Auth\Data\LoginData;
 use App\Modules\Auth\Contracts\AuthenticationServiceContract;
+use App\Modules\Auth\Data\LoginData;
 
 class LoginUserAction
 {

@@ -3,10 +3,10 @@
 namespace App\Modules\Auth\Services;
 
 use App\Models\User;
+use App\Modules\Auth\Contracts\AuthenticationServiceContract;
+use App\Modules\Auth\Data\LoginData;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-use App\Modules\Auth\Data\LoginData;
-use App\Modules\Auth\Contracts\AuthenticationServiceContract;
 
 class AuthenticationService implements AuthenticationServiceContract
 {
