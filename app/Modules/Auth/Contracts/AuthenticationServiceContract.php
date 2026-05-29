@@ -7,4 +7,5 @@ use App\Modules\Auth\Data\LoginData;
 interface AuthenticationServiceContract
 {
     public function login(LoginData $data): array;
+    public function register(RegisterData $data): array;
 }

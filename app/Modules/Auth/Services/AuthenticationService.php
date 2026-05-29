@@ -7,6 +7,7 @@ use App\Modules\Auth\Contracts\AuthenticationServiceContract;
 use App\Modules\Auth\Data\LoginData;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use App\Modules\Auth\Data\RegisterData;
 
 class AuthenticationService implements AuthenticationServiceContract
 {
@@ -21,6 +22,22 @@ class AuthenticationService implements AuthenticationServiceContract
                 'email' => ['Invalid credentials provided.'],
             ]);
         }
+
+        $token = $user->createToken($data->deviceName)->plainTextToken;
+
+        return [
+            'user' => $user,
+            'token' => $token,
+        ];
+    }
+
+    public function register(RegisterData $data): array
+    {
+        $user = User::create([
+            'name' => $data->name,
+            'email' => $data->email,
+            'password' => Hash::make($data->password),
+        ]);
 
         $token = $user->createToken($data->deviceName)->plainTextToken;
 
