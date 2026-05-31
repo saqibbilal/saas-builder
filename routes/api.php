@@ -4,13 +4,17 @@ use App\Http\Controllers\Api\V1\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\Auth\RegisterController;
 use App\Http\Controllers\Api\V1\Auth\MeController;
+use App\Http\Controllers\Api\V1\Auth\LogoutController;
 
-Route::middleware('auth:sanctum')
-    ->get('/v1/auth/me', MeController::class);
+Route::prefix('v1/auth')->group(function () {
 
-Route::prefix('v1')->group(function () {
-    Route::prefix('auth')->group(function () {
-        Route::post('/login', LoginController::class);
-        Route::post('/register', RegisterController::class);
+    // Public Routes
+    Route::post('/login', LoginController::class);
+    Route::post('/register', RegisterController::class);
+
+    // Protected Routes
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/me', MeController::class);
+        Route::post('/logout', LogoutController::class);
     });
 });
