@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\V1\Auth\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Modules\Auth\Http\Controllers\RegisterController;
+use App\Http\Controllers\Api\V1\Auth\RegisterController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
