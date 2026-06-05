@@ -11,13 +11,16 @@ class LogAuthenticationActivityListener
     public function handle(
         UserRegistered|UserLoggedIn|UserLoggedOut $event,
     ): void {
-        logger()->info(
-            sprintf(
-                '%s: User #%s (%s)',
-                class_basename($event),
-                $event->user->id,
-                $event->user->email,
-            )
-        );
+        $eventName = match (true) {
+            $event instanceof UserRegistered => 'auth.register',
+            $event instanceof UserLoggedIn => 'auth.login',
+            $event instanceof UserLoggedOut => 'auth.logout',
+        };
+
+        activity()
+            ->performedOn($event->user)
+            ->causedBy($event->user)
+            ->event($eventName)
+            ->log($eventName);
     }
 }
