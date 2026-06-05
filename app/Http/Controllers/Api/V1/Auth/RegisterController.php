@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Api\V1\Auth;
 
-use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Modules\Auth\Actions\RegisterUserAction;
 use App\Modules\Auth\Data\RegisterData;
-use App\Http\Requests\Auth\RegisterRequest;
+use Illuminate\Http\JsonResponse;
 
 class RegisterController extends Controller
 {

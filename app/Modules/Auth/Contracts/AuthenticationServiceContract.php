@@ -8,5 +8,6 @@ use App\Modules\Auth\Data\RegisterData;
 interface AuthenticationServiceContract
 {
     public function login(LoginData $data): array;
+
     public function register(RegisterData $data): array;
 }

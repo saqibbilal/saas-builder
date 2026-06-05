@@ -4,6 +4,8 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Validation\ValidationException;
 
 class LoginRequest extends FormRequest
 {
@@ -27,5 +29,47 @@ class LoginRequest extends FormRequest
             'password' => ['required', 'string'],
             'device_name' => ['required', 'string', 'max:255'],
         ];
+    }
+
+    public function throttleKey(): string
+    {
+        return strtolower((string) $this->string('email'))
+            .'|'
+            .$this->ip();
+    }
+
+    public function ensureIsNotRateLimited(): void
+    {
+        if (! RateLimiter::tooManyAttempts(
+            $this->throttleKey(),
+            5,
+        )) {
+            return;
+        }
+
+        $seconds = RateLimiter::availableIn(
+            $this->throttleKey(),
+        );
+
+        throw ValidationException::withMessages([
+            'email' => [
+                "Too many login attempts. Try again in {$seconds} seconds.",
+            ],
+        ]);
+    }
+
+    public function hitRateLimiter(): void
+    {
+        RateLimiter::hit(
+            $this->throttleKey(),
+            60,
+        );
+    }
+
+    public function clearRateLimiter(): void
+    {
+        RateLimiter::clear(
+            $this->throttleKey(),
+        );
     }
 }

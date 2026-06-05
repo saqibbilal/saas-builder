@@ -5,9 +5,9 @@ namespace App\Modules\Auth\Services;
 use App\Models\User;
 use App\Modules\Auth\Contracts\AuthenticationServiceContract;
 use App\Modules\Auth\Data\LoginData;
+use App\Modules\Auth\Data\RegisterData;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-use App\Modules\Auth\Data\RegisterData;
 
 class AuthenticationService implements AuthenticationServiceContract
 {

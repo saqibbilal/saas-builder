@@ -8,6 +8,7 @@ use App\Http\Resources\UserResource;
 use App\Modules\Auth\Actions\LoginUserAction;
 use App\Modules\Auth\Data\LoginData;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
@@ -15,11 +16,21 @@ class LoginController extends Controller
         LoginRequest $request,
         LoginUserAction $loginUserAction,
     ): JsonResponse {
+        $request->ensureIsNotRateLimited();
+
         $data = LoginData::fromRequest(
-            $request->validated()
+            $request->validated(),
         );
 
-        $result = $loginUserAction($data);
+        try {
+            $result = $loginUserAction($data);
+
+            $request->clearRateLimiter();
+        } catch (ValidationException $exception) {
+            $request->hitRateLimiter();
+
+            throw $exception;
+        }
 
         return response()->json([
             'message' => 'Login successful.',

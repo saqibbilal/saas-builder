@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\V1\Auth\LoginController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\V1\Auth\RegisterController;
-use App\Http\Controllers\Api\V1\Auth\MeController;
 use App\Http\Controllers\Api\V1\Auth\LogoutController;
+use App\Http\Controllers\Api\V1\Auth\MeController;
+use App\Http\Controllers\Api\V1\Auth\RegisterController;
+use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1/auth')->group(function () {
 
